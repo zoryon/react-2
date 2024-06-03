@@ -1,4 +1,4 @@
-FROM mariadb
+FROM mariadb:11.3.2
 ARG UID
 ARG GID
 RUN groupadd -f informatica -g$GID
