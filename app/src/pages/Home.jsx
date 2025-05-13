@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 const Home = () => {
+    const [load, setLoad] = useState(false);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -8,26 +9,37 @@ const Home = () => {
             const res =  await fetch("http://localhost:8080/alunni", {
                 method: "GET"
             }).then(res => res.json());
-
-            setData(res);
+            setData(res.data);
         }
         get();
     }, []);
     
     return (
         <div className='px-12 space-y-12 py-12'>
-            {data && (data.map((obj, i) => {
-                return (
-                    <div className='border border-black flex flex-col justify-center items-center text-xl'>
-                        <div>
-                            Nome: {obj.nome}
-                        </div>
-                        <div>
-                            Cognome: {obj.cognome}
-                        </div>
-                    </div>
-                );
-            }))}
+            {
+                load ? (
+                    data && (data.map((obj, i) => {
+                        return (
+                            <div className='border border-black flex flex-col justify-center items-center text-xl'>
+                                <div>
+                                    Nome: {obj.nome}
+                                </div>
+                                <div>
+                                    Cognome: {obj.cognome}
+                                </div>
+                            </div>
+                        );
+                    }))
+                ) : (
+                    <button 
+                        onClick={() => setLoad(prev => !prev)}
+                        className='border border-black px-4 py-2 cursor-pointer'
+                    >
+                        Load students
+                    </button>
+                )
+            }
+            
         </div>
     );
 }
