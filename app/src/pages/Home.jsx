@@ -24,7 +24,7 @@ const Home = () => {
         <div className='px-12 space-y-12 py-12'>
             {
                 alunni ? (
-                    <AlunniTable alunni={alunni} />
+                    <AlunniTable alunni={alunni} setAlunni={setAlunni} />
                 ) : (
                     <button
                         onClick={() => fetchAlunni()}
