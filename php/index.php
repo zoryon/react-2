@@ -12,6 +12,6 @@ $app->addBodyParsingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 
 $app->get('/alunni', "AlunniController:index");
-$app->delete('/alunni', "AlunniController:destroy");
+$app->delete('/alunni/{id}', "AlunniController:destroy");
 
 $app->run();

@@ -20,12 +20,8 @@ const AlunniRow = ({ alunno, setAlunni }) => {
     };
 
     const handleDelete = async (id) => {
-        const res = await fetch("http://localhost:8080/alunni", {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ id }),
+        const res = await fetch(`http://localhost:8080/alunni/${id}`, { 
+            method: "DELETE" 
         }).then(res => res.json());
 
         if (!res.success) {
