@@ -9,6 +9,10 @@ const Home = () => {
             const res =  await fetch("http://localhost:8080/alunni", {
                 method: "GET"
             }).then(res => res.json());
+
+            if (!res.success) {
+                console.error(`Error: ${res.message}`);
+            }
             setData(res.data);
         }
         get();
