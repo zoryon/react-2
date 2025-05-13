@@ -8,7 +8,10 @@ require __DIR__ . '/includes/ApiResponse.php';
 require __DIR__ . '/controllers/AlunniController.php';
 
 $app = AppFactory::create();
+$app->addBodyParsingMiddleware();
+$app->addErrorMiddleware(true, true, true);
 
 $app->get('/alunni', "AlunniController:index");
+$app->delete('/alunni', "AlunniController:destroy");
 
 $app->run();

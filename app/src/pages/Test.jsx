@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SharedButton from '../components/SharedButton';
 
 const Test = () => {

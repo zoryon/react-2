@@ -1,49 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react';
+import AlunniTable from '../components/AlunniTable';
 
 const Home = () => {
-    const [load, setLoad] = useState(false);
-    const [data, setData] = useState([]);
+    const [isPending, setIsPending] = useState(false);
+    const [alunni, setAlunni] = useState(null);
 
-    useEffect(() => {
-        async function get() {
-            const res =  await fetch("http://localhost:8080/alunni", {
-                method: "GET"
-            }).then(res => res.json());
+    async function fetchAlunni() {
+        setIsPending(true);
 
-            if (!res.success) {
-                console.error(`Error: ${res.message}`);
-            }
-            setData(res.data);
+        const res = await fetch("http://localhost:8080/alunni", {
+            method: "GET"
+        }).then(res => res.json());
+
+        if (!res.success) {
+            console.error(`Error: ${res.message}`);
         }
-        get();
-    }, []);
-    
+        setAlunni(res.data);
+
+        setIsPending(false);
+    }
+
     return (
         <div className='px-12 space-y-12 py-12'>
             {
-                load ? (
-                    data && (data.map((obj, i) => {
-                        return (
-                            <div className='border border-black flex flex-col justify-center items-center text-xl'>
-                                <div>
-                                    Nome: {obj.nome}
-                                </div>
-                                <div>
-                                    Cognome: {obj.cognome}
-                                </div>
-                            </div>
-                        );
-                    }))
+                alunni ? (
+                    <AlunniTable alunni={alunni} />
                 ) : (
-                    <button 
-                        onClick={() => setLoad(prev => !prev)}
+                    <button
+                        onClick={() => fetchAlunni()}
                         className='border border-black px-4 py-2 cursor-pointer'
                     >
-                        Load students
+                        {isPending ? "Loading.." : "Load students"}
                     </button>
                 )
             }
-            
         </div>
     );
 }

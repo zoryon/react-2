@@ -11,4 +11,16 @@ class AlunniController
 
     return ApiResponse::success("Alunni trovati correttamente", $result)->toResponse($response);
   }
+
+  public function destroy(Request $request, Response $response, $args) {
+    $body = $request->getParsedBody();
+    if (!isset($body["id"])) {
+      return ApiResponse::error("ID non fornito")->toResponse($response);
+    }
+    
+    $db = DB::getInstance();
+    $result = $db->delete("alunni", ["id" => $body["id"]]);
+
+    return ApiResponse::success("Alunno eliminato correttamente", $result)->toResponse($response);
+  }
 }
