@@ -12,8 +12,25 @@ class AlunniController
     return ApiResponse::success("Alunni trovati correttamente", $result)->toResponse($response);
   }
 
+  public function create(Request $request, Response $response, $args) {
+    $body = $request->getParsedBody();
+    $name = $body["nome"];
+    $surname = $body["cognome"];
+    if (!isset($name) || !isset($surname)) {
+      return ApiResponse::clientError("Malformed data")->toResponse($response);
+    }
+    
+    $db = DB::getInstance();
+    $newId = $db->insert("alunni", [
+      "nome" => $name,
+      "cognome" => $surname,
+    ]);
+
+    return ApiResponse::success("Alunno eliminato correttamente", $newId)->toResponse($response);
+  }
+
   public function destroy(Request $request, Response $response, $args) {
-    // $body = $request->getParsedBody();
+    $body = $request->getParsedBody();
     // if (!isset($body["id"])) {
     //   return ApiResponse::error("ID non fornito")->toResponse($response);
     // }

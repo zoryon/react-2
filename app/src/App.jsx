@@ -5,6 +5,8 @@ import 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4';
 import './App.css';
 
 import Home from './pages/Home';
+import CreateUserPage from './pages/CreateUserPage';
+
 import Test from './pages/Test';
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/users/create" element={<CreateUserPage />} />
+
         <Route path="/test" element={<Test />} />
       </Routes>
     </div>
