@@ -56,8 +56,11 @@ const AlunniRow = ({ alunno, setAlunni }) => {
                         >
                             Elimina
                         </button>
-                        <button className="border border-black px-2 py-0.5 cursor-pointer">
-                            Aggiorna
+                        <button 
+                            className="border border-black px-2 py-0.5 cursor-pointer"
+                            onClick={() => window.location.href = "/users/update/" + alunno.id}
+                        >
+                            Modifica
                         </button>
                     </>
                 )}
