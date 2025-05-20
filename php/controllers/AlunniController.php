@@ -31,10 +31,9 @@ class AlunniController
 
   public function update(Request $request, Response $response, $args) {
     $body = $request->getParsedBody();
-    $id = $body["id"];
     $name = $body["nome"];
     $surname = $body["cognome"];
-    if (!isset($id) || !isset($name) || !isset($surname)) {
+    if (!isset($name) || !isset($surname)) {
       return ApiResponse::clientError("Malformed data")->toResponse($response);
     }
     
@@ -43,7 +42,7 @@ class AlunniController
       "nome" => $name,
       "cognome" => $surname,
     ], [
-      "id" => $id
+      "id" => $args["id"]
     ]);
 
     return ApiResponse::success("Alunno aggiornato correttamente", $newId)->toResponse($response);

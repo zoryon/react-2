@@ -10,13 +10,12 @@ const UpdateUserPage = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const res = await fetch("http://localhost:8080/alunni/" + id, {
+        const res = await fetch(`http://localhost:8080/alunni/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                id,
                 nome: name,
                 cognome: surname,
             }),
