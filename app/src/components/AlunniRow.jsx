@@ -107,6 +107,8 @@ const AlunniRow = ({ alunno, setAlunni }) => {
                         <button onClick={() => {
                             setConfirmationState(defaultConfirmationState);
                             setIsUpdating(false);
+                            setUpdateName(alunno.nome);
+                            setUpdateCognome(alunno.cognome);
                         }} className="cursor-pointer">No</button>
                     </>
                 ) : (
